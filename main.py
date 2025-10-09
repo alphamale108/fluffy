@@ -440,10 +440,14 @@ async def txt_handler(bot: Client, m: Message):
                 
 
             try:  
-                cc = f'<blockquote>{str(count).zfill(3)}</blockquote>\n{name1}'
-                cc1 = f' '
                 ccimg = f'•——— `{a_name}` ———•\n\n[——— ✨ {str(count).zfill(3)} ✨ ———]({link0})\n\n🖼️𝐓𝐢𝐭𝐥𝐞 » `{name1} .jpg`\n\n<pre><code>📚 Course : {b_name}</code></pre>\n\n🌟𝐄𝐱𝐭𝐫𝐚𝐜𝐭𝐞𝐝 𝐁𝐲 » `{CR}`\n'
                 ccyt = f'•——— `{a_name}` ———•\n\n[——— ✨ {str(count).zfill(3)} ✨ ———]({link0})\n\n🎞️𝐓𝐢𝐭𝐥𝐞 » `{name1} .mp4`\n\n<a href="{url}">__**Click Here to Watch Stream**__</a>\n\n<pre><code>📚 Course : {b_name}</code></pre>\n\n🌟𝐄𝐱𝐭𝐫𝐚𝐜𝐭𝐞𝐝 𝐁𝐲 » `{CR}`\n'
+                 cc = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🎥 Title : {name1}** [{res}]\n\n**📚COURSE : {b_name}** [{app}]\n\n**❤️ Extracted By :** {CR}'
+                cc1 = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**📁 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+                cczip = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**📁 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+                ccimg = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🖼️ Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+                ccm = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🎵 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+                cchtml = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🌐 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
                                  
                 if "drive" in url:
                     try:
@@ -821,8 +825,12 @@ async def text_handler(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:
-                cc = f'🎞️𝐓𝐢𝐭𝐥𝐞 » `{name}` [{res}].mp4\n🔗𝐋𝐢𝐧𝐤 » <a href="{link}">__**CLICK HERE**__</a>\n\n🌟𝐄𝐱𝐭𝐫𝐚𝐜𝐭𝐞𝐝 𝐁𝐲 » `𝗦𝗣𝗜𝗗𝗬 𝗘𝗫𝗧𝗥𝗔𝗖𝗧𝗢𝗥`'
-                cc1 = f'📕𝐓𝐢𝐭𝐥𝐞 » `{name}`\n🔗𝐋𝐢𝐧𝐤 » <a href="{link}">__**CLICK HERE**__</a>\n\n🌟𝐄𝐱𝐭𝐫𝐚𝐜𝐭𝐞𝐝 𝐁𝐲 » `𝗦𝗣𝗜𝗗𝗬 𝗘𝗫𝗧𝗥𝗔𝗖𝗧𝗢𝗥`'
+                 cc = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🎥 Title : {name1}** [{res}]\n\n**📚COURSE : {b_name}** [{app}]\n\n**❤️ Extracted By :** {CR}'
+                cc1 = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**📁 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+                cczip = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**📁 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+                ccimg = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🖼️ Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+                ccm = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🎵 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+                cchtml = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🌐 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
                                 
                 if "drive" in url:
                     try:
