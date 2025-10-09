@@ -824,7 +824,7 @@ async def text_handler(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:
-                 cc = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🎥 Title : {name1}** [{res}]\n\n**📚COURSE : {b_name}** [{app}]\n\n**❤️ Extracted By :** {CR}'
+                cc = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🎥 Title : {name1}** [{res}]\n\n**📚COURSE : {b_name}** [{app}]\n\n**❤️ Extracted By :** {CR}'
                 cc1 = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**📁 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
                 cczip = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**📁 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
                 ccimg = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🖼️ Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
