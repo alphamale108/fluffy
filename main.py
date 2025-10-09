@@ -256,7 +256,7 @@ async def txt_handler(bot: Client, m: Message):
     x = await input.download()
     await input.delete(True)
     file_name, ext = os.path.splitext(os.path.basename(x))
-    credit = f"𝗦𝗣𝗜𝗗𝗬 🕸️"
+    credit = f"𝖊𝖑 𝖒𝖆𝖙𝖆𝖉𝖔𝖗🌹"
     pdf_count = 0
     img_count = 0
     zip_count = 0
@@ -342,9 +342,9 @@ async def txt_handler(bot: Client, m: Message):
     raw_text3 = input3.text
     await input3.delete(True)
     # Default credit message
-    credit = "️🕸️ 𝗦𝗣𝗜𝗗𝗬 🕸️"
+    credit = "️𝖊𝖑 𝖒𝖆𝖙𝖆𝖉𝖔𝖗🌹"
     if raw_text3 == '1':
-        CR = '𝗦𝗣𝗜𝗗𝗬 𝗘𝗫𝗧𝗥𝗔𝗖𝗧𝗢𝗥'
+        CR = '𝖊𝖑 𝖒𝖆𝖙𝖆𝖉𝖔𝖗🌹'
     elif raw_text3:
         CR = raw_text3
     else:
