@@ -435,8 +435,27 @@ async def txt_handler(bot: Client, m: Message):
             #elif "youtube.com" in url or "youtu.be" in url:
                 #cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
 
-            else:
+            elif:
                 cmd = f'yt-dlp --add-header "Referer: https://player.akamai.net.in" -f "{ytf}" "{url}" -o "{name}.mp4"'
+
+            else:
+                
+               if '*' in url:
+                    # It's a video with XOR key - download and decrypt
+                    video_url, xor_key = url.split('*', 1)
+                    cmd = f'aria2c --header="Referer: https://player.akamai.net.in" --header="User-Agent: Mozilla/5.0" --check-certificate=false -o "{name}.encrypted" "{video_url}" && ffmpeg -decryption_key {xor_key} -i "{name}.encrypted" -c copy "{name}.mp4" && del "{name}.encrypted"'
+                    os.system(cmd)
+                    copy = await bot.send_video(chat_id=channel_id, video=f'{name}.mp4', caption=cc, message_thread_id=current_thread_id)
+                    count += 1
+                    os.remove(f'{name}.mp4')
+               else:
+                    # It's a PDF - use existing PDF download method
+                    cmd = f'yt-dlp --add-header "referer:https://player.akamai.net.in" -o "{name}.pdf" "{url}"'
+                    download_cmd = f"{cmd} -R 25 --fragment-retries 25"
+                    os.system(download_cmd)
+                    copy = await bot.send_document(chat_id=channel_id, document=f'{name}.pdf', caption=cc1, message_thread_id=current_thread_id)
+                    count += 1
+                    os.remove(f'{name}.pdf')
                 
 
             try:  
