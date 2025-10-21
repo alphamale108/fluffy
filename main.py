@@ -428,9 +428,20 @@ async def txt_handler(bot: Client, m: Message):
             else:
                 ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
             
-            if "jw-prod" in url:
-                #cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
-                cmd = f'yt-dlp --add-header "Referer: https://player.akamai.net.in" -o "{name}.%(ext)s" "{url}"'
+            if "utkarshapp" and ".pdf"  in url:
+                #It is pdf,so download pdf file
+                cmd = f'yt-dlp -o "{name}.pdf" "{url}"'
+                download_cmd = f"{cmd} -R 25 --fragment-retries 25"
+                os.system(download_cmd)
+                copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)
+                count += 1
+                os.remove(f'{name}.pdf')
+
+            elif "utkarshapp" in url:
+               marshmallow_url = f'https://player.marshmallowapi.workers.dev/?video={url}'
+               cmd = f'yt-dlp -o "{name}.mp4" "{marshmallow_url}"'
+                
+                
 
             #elif "youtube.com" in url or "youtu.be" in url:
                 #cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
@@ -438,24 +449,40 @@ async def txt_handler(bot: Client, m: Message):
              #elif:
                # cmd = f'yt-dlp --add-header "Referer: https://player.akamai.net.in" -f "{ytf}" "{url}" -o "{name}.mp4"' """
 
+            
+            elif ".mkv*" in url or ".key" in url:
+            # URL aur key separate karo
+            if ".mkv*" in url:
+                video_url, decryption_key = url.split(".mkv*")
+                video_url += ".mkv"
             else:
-                
-               if '*' in url:
-                    # It's a video with XOR key - download and decrypt
-                    video_url, xor_key = url.split('*', 1)
-                    cmd = f'aria2c --header="Referer: https://player.akamai.net.in" --header="User-Agent: Mozilla/5.0" --check-certificate=false -o "{name}.encrypted" "{video_url}" && ffmpeg -decryption_key {xor_key} -i "{name}.encrypted" -c copy "{name}.mp4" && del "{name}.encrypted"'
-                    os.system(cmd)
-                    copy = await bot.send_video(chat_id=channel_id, video=f'{name}.mp4', caption=cc, message_thread_id=current_thread_id)
-                    count += 1
-                    os.remove(f'{name}.mp4')
-               else:
-                    # It's a PDF - use existing PDF download method
-                    cmd = f'yt-dlp --add-header "referer:https://player.akamai.net.in" -o "{name}.pdf" "{url}"'
-                    download_cmd = f"{cmd} -R 25 --fragment-retries 25"
-                    os.system(download_cmd)
-                    copy = await bot.send_document(chat_id=channel_id, document=f'{name}.pdf', caption=cc1, message_thread_id=current_thread_id)
-                    count += 1
-                    os.remove(f'{name}.pdf')
+                video_url = url
+                decryption_key = "9907015"  # Default key ya user se lelo
+            
+            # aria2c se download karo
+            aria_cmd = f'aria2c --header="Referer: https://player.akamai.net.in/" -o "temp_encrypted_{name}.mkv" "{video_url}"'
+            
+            # Download encrypted file
+            subprocess.run(aria_cmd, shell=True, check=True)
+            
+            # XOR Decryption
+            decrypt_cmd = f'python3 -c "\nkey = \'{decryption_key}\'\nkey_bytes = key.encode()\nkey_len = len(key_bytes)\n\nwith open(\'temp_encrypted_{name}.mkv\', \'rb\') as f_in:\n    with open(\'{name}.mkv\', \'wb\') as f_out:\n        index = 0\n        while True:\n            chunk = f_in.read(1024)\n            if not chunk: break\n            decrypted = bytes([chunk[i] ^ key_bytes[(index + i) % key_len] for i in range(len(chunk))])\n            f_out.write(decrypted)\n            index += len(chunk)\n"'
+            
+            subprocess.run(decrypt_cmd, shell=True, check=True)
+            
+            # Temporary file delete karo
+            subprocess.run(f'rm -f "temp_encrypted_{name}.mkv"', shell=True)
+            
+            continue  # Next video pe move karo
+
+        
+
+            else:
+              cmd = f'yt-dlp --add-header "Referer: https://player.akamai.net.in" -f "{ytf}" "{url}" -o "{name}.%(ext)s"'
+
+        # Execute command
+        subprocess.run(cmd, shell=True, check=True)
+               
                 
 
             try:  
