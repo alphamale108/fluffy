@@ -528,7 +528,7 @@ async def txt_handler(bot: Client, m: Message):
                         count += 1
                         continue   
 
-                elif ".pdf" in url:
+                  elif ".pdf" in url:
                     try:
                         await asyncio.sleep(4)
                         url = url.replace(" ", "%20")
@@ -550,9 +550,9 @@ async def txt_handler(bot: Client, m: Message):
                         await m.reply_text(str(e))
                         time.sleep(e.x)
                         count += 1
-                        continue
+                        continue"""
 
-                elif ".pdf" in url:
+               """ elif ".pdf" in url:
                     try:
                         cmd = f'yt-dlp -o "{name}.pdf" --add-header "Referer: https://player.akamai.net.in" "{url}"'
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"
@@ -564,7 +564,7 @@ async def txt_handler(bot: Client, m: Message):
                         await m.reply_text(str(e))
                         time.sleep(e.x)
                         count += 1
-                        continue
+                        continue"""
 
                 elif any(ext in url for ext in [".jpg", ".jpeg", ".png"]):
                     try:
@@ -609,7 +609,7 @@ async def txt_handler(bot: Client, m: Message):
                            f'╰━━━🖼️𝐓𝐡𝐮𝐦𝐛𝐧𝐚𝐢𝐥 » <a href="{raw_text6}">__**Thumb Link**__</a>\n' \
                            f"━━━━━━━━━━━━━━━━━━━━━━━━\n" \
                            f"🛑**Send** /stop **to stop process**\n" \
-                           f"✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🕸️𝗦𝗣𝗜𝗗𝗬🕸️`"
+                           f"✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`"
                     prog = await m.reply_text(Show, disable_web_page_preview=True)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
@@ -640,7 +640,7 @@ async def txt_handler(bot: Client, m: Message):
                        f"🔹𝙵𝚊𝚒𝚕𝚎𝚍 𝙻𝚒𝚗𝚔𝚜 » {failed_count}\n"
                        f"✅𝚂𝚝𝚊𝚝𝚞𝚜 » 𝙲𝚘𝚖𝚙𝚕𝚎𝚝𝚎𝚍\n"
                        f"━━━━━━━━━━━━━━━━━━━━\n"
-                       f"✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🕸️𝗦𝗣𝗜𝗗𝗬🕸️`")
+                       f"✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`")
     
 
 @bot.on_message(filters.command(["cp"]) )
@@ -650,7 +650,7 @@ async def txt_handler(bot: Client, m: Message):
     x = await input.download()
     await input.delete(True)
     file_name, ext = os.path.splitext(os.path.basename(x))
-    credit = f"𝗦𝗣𝗜𝗗𝗬 🕷️"
+    credit = f"🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷"
     try:    
         with open(x, "r") as f:
             content = f.read()
@@ -699,7 +699,7 @@ async def txt_handler(bot: Client, m: Message):
 
                 if ".pdf" in url or "drive" in url or ".jpg" in url or ".jpeg" in url or ".png" in url:
                     try:
-                        await m.reply_text(text=f'——— ✨ [{str(count).zfill(3)}]({link0}) ✨ ———\n\n📔𝐓𝐢𝐭𝐥𝐞 » `{name}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇸 🇵 🇮 🇩 🇾`', disable_web_page_preview=True, reply_markup=BUTTONSDOC)
+                        await m.reply_text(text=f'——— ✨ [{str(count).zfill(3)}]({link0}) ✨ ———\n\n📔𝐓𝐢𝐭𝐥𝐞 » `{name}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`', disable_web_page_preview=True, reply_markup=BUTTONSDOC)
                         count +=1
                     except Exception as e:
                         await m.reply_text(str(e))    
@@ -911,7 +911,7 @@ async def text_handler(bot: Client, m: Message):
                         count += 1
                         pass    
 
-                elif ".pdf" in url:
+               """ elif ".pdf" in url:
                     try:
                         await asyncio.sleep(4)
         # Replace spaces with %20 in the URL
@@ -943,7 +943,7 @@ async def text_handler(bot: Client, m: Message):
                         await m.reply_text(str(e))
                         time.sleep(e.x)
                         count += 1
-                        pass
+                        pass   """
 
                 elif ".pdf" in url:
                     try:
@@ -990,7 +990,7 @@ async def text_handler(bot: Client, m: Message):
                                 
                 else:
                     emoji_message = await show_random_emojis(message)
-                    Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇸 🇵 🇮 🇩 🇾`‌"
+                    Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`"
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
@@ -1001,7 +1001,7 @@ async def text_handler(bot: Client, m: Message):
                     time.sleep(1)
 
             except Exception as e:
-                    Error= f"⚠️𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠 𝐈𝐧𝐭𝐞𝐫𝐮𝐩𝐭𝐞𝐝\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇸 🇵 🇮 🇩 🇾`"
+                    Error= f"⚠️𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠 𝐈𝐧𝐭𝐞𝐫𝐮𝐩𝐭𝐞𝐝\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`"
                     await m.reply_text(Error)
                     count += 1
                     pass
