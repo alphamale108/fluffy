@@ -479,10 +479,7 @@ async def txt_handler(bot: Client, m: Message):
 
             else:
               cmd = f'yt-dlp --add-header "Referer: https://player.akamai.net.in" -f "{ytf}" "{url}" -o "{name}.%(ext)s"'
-
-        # Execute command
-        subprocess.run(cmd, shell=True, check=True)
-               
+          
                 
 
             try:  
