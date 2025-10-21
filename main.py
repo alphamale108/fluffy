@@ -452,28 +452,28 @@ async def txt_handler(bot: Client, m: Message):
             
             elif ".mkv*" in url or ".key" in url:
             # URL aur key separate karo
-            if ".mkv*" in url:
-                video_url, decryption_key = url.split(".mkv*")
-                video_url += ".mkv"
-            else:
-                video_url = url
-                decryption_key = "9907015"  # Default key ya user se lelo
+                    if ".mkv*" in url:
+                        video_url, decryption_key = url.split(".mkv*")
+                        video_url += ".mkv"
+                    else:
+                        video_url = url
+                        decryption_key = "9907015"  # Default key ya user se lelo
             
             # aria2c se download karo
-            aria_cmd = f'aria2c --header="Referer: https://player.akamai.net.in/" -o "temp_encrypted_{name}.mkv" "{video_url}"'
+                    aria_cmd = f'aria2c --header="Referer: https://player.akamai.net.in/" -o "temp_encrypted_{name}.mkv" "{video_url}"'
             
             # Download encrypted file
-            subprocess.run(aria_cmd, shell=True, check=True)
+                    subprocess.run(aria_cmd, shell=True, check=True)
             
             # XOR Decryption
-            decrypt_cmd = f'python3 -c "\nkey = \'{decryption_key}\'\nkey_bytes = key.encode()\nkey_len = len(key_bytes)\n\nwith open(\'temp_encrypted_{name}.mkv\', \'rb\') as f_in:\n    with open(\'{name}.mkv\', \'wb\') as f_out:\n        index = 0\n        while True:\n            chunk = f_in.read(1024)\n            if not chunk: break\n            decrypted = bytes([chunk[i] ^ key_bytes[(index + i) % key_len] for i in range(len(chunk))])\n            f_out.write(decrypted)\n            index += len(chunk)\n"'
+                    decrypt_cmd = f'python3 -c "\nkey = \'{decryption_key}\'\nkey_bytes = key.encode()\nkey_len = len(key_bytes)\n\nwith open(\'temp_encrypted_{name}.mkv\', \'rb\') as f_in:\n    with open(\'{name}.mkv\', \'wb\') as f_out:\n        index = 0\n        while True:\n            chunk = f_in.read(1024)\n            if not chunk: break\n            decrypted = bytes([chunk[i] ^ key_bytes[(index + i) % key_len] for i in range(len(chunk))])\n            f_out.write(decrypted)\n            index += len(chunk)\n"'
             
-            subprocess.run(decrypt_cmd, shell=True, check=True)
+                    subprocess.run(decrypt_cmd, shell=True, check=True)
             
             # Temporary file delete karo
-            subprocess.run(f'rm -f "temp_encrypted_{name}.mkv"', shell=True)
+                    subprocess.run(f'rm -f "temp_encrypted_{name}.mkv"', shell=True)
             
-            continue  # Next video pe move karo
+                    continue  # Next video pe move karo
 
         
 
