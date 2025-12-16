@@ -550,9 +550,9 @@ async def txt_handler(bot: Client, m: Message):
                         await m.reply_text(str(e))
                         time.sleep(e.x)
                         count += 1
-                        continue"""
+                        continue
 
-               elif ".pdf" in url:
+               """elif ".pdf" in url:
                     try:
                         cmd = f'yt-dlp -o "{name}.pdf" --add-header "Referer: https://player.akamai.net.in" "{url}"'
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"
