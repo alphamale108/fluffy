@@ -528,7 +528,7 @@ async def txt_handler(bot: Client, m: Message):
                         count += 1
                         continue   
 
-                  elif ".pdf" in url:
+                elif ".pdf" in url:
                     try:
                         await asyncio.sleep(4)
                         url = url.replace(" ", "%20")
@@ -552,7 +552,7 @@ async def txt_handler(bot: Client, m: Message):
                         count += 1
                         continue"""
 
-               """ elif ".pdf" in url:
+               elif ".pdf" in url:
                     try:
                         cmd = f'yt-dlp -o "{name}.pdf" --add-header "Referer: https://player.akamai.net.in" "{url}"'
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"
