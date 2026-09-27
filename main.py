@@ -262,7 +262,6 @@ async def youtube_to_txt(client, message: Message):
 
     os.remove(txt_file)
 
-
 @bot.on_message(filters.command(["drm"]))
 async def txt_handler(bot: Client, m: Message):
     editable = await m.reply_text("`🔹Hi I am Poweful TXT Downloader📥 Bot.\n🔹Send me the txt file and wait.`")
@@ -662,4 +661,498 @@ async def txt_handler(bot: Client, m: Message):
         "`✨𝙱𝚊𝚝𝚌𝚑 𝚂𝚞𝚖𝚖𝚊𝚛𝚢✨\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
         f"🔢𝙸𝚗𝚍𝚎𝚡 𝚁𝚊𝚗𝚐𝚎 » {raw_text} ➠ {end}\n"
-        f"📚𝙱𝚊𝚝𝚌𝚑 𝙽𝚊
+        f"📚𝙱𝚊𝚝𝚌𝚑 𝙽𝚊𝚖𝚎 » {b_name}\n"
+        "━━━━━━━━━━━━━━━━━━━━\n"
+        f"✨𝚃𝚡𝚝 𝚂𝚞𝚖𝚖𝚊𝚛𝚢✨ : {len(links)}\n"
+        "━━━━━━━━━━━━━━━━━━━━\n"
+        f"🔹𝚉𝙸𝙿 » {zip_count}  🔹𝙿𝙳𝙵 » {pdf_count}\n"
+        f"🔹𝙸𝚖𝚐 » {img_count}  🔹𝚅𝚒𝚍𝚎𝚘 » {video_count}\n"
+        "━━━━━━━━━━━━━━━━━━━━\n"
+        f"🔹𝙵𝚊𝚒𝚕𝚎𝚍 𝙻𝚒𝚗𝚔𝚜 » {failed_count}\n"
+        "✅𝚂𝚝𝚊𝚝𝚞𝚜 » 𝙲𝚘𝚖𝚙𝚕𝚎𝚝𝚎𝚍\n"
+        "━━━━━━━━━━━━━━━━━━━━\n"
+        "✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`"
+    )
+
+@bot.on_message(filters.command(["cp"]))
+async def txt_handler(bot: Client, m: Message):
+    editable = await m.reply_text("`🔹Hi I am Poweful CP stream📥 Bot.\n🔹Send me the TXT file and wait.`")
+    input: Message = await bot.listen(editable.chat.id)
+    x = await input.download()
+    await input.delete(True)
+    file_name, ext = os.path.splitext(os.path.basename(x))
+    credit = "🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷"
+
+    try:
+        with open(x, "r") as f:
+            content = f.read()
+        content = content.split("\n")
+        links = []
+        for i in content:
+            links.append(i.split("://", 1))
+        os.remove(x)
+    except Exception:
+        await m.reply_text("<pre><code>Invalid file input.</code></pre>")
+        try:
+            os.remove(x)
+        except Exception:
+            pass
+        return
+
+    await editable.edit(f"`🔹Total 🔗 links found are {len(links)}\n🔹Send From where you want to stream`")
+    input0: Message = await bot.listen(editable.chat.id)
+    raw_text = input0.text
+    await input0.delete(True)
+    try:
+        arg = int(raw_text)
+    except Exception:
+        arg = 1
+
+    await editable.delete(True)
+    b_name = file_name
+    await m.reply_text(f"`🎯Target Batch : {b_name}`")
+
+    count = int(raw_text) if raw_text.isdigit() else 1
+
+    try:
+        for i in range(arg - 1, len(links)):
+            Vxy = links[i][1].replace("file/d/", "uc?export=download&id=") \
+                              .replace("www.youtube-nocookie.com/embed", "youtu.be") \
+                              .replace("?modestbranding=1", "") \
+                              .replace("/view?usp=sharing", "")
+            url = "https://" + Vxy
+            link0 = "https://" + Vxy
+            urlcp = "https://dragoapi.vercel.app/video/https://" + Vxy
+
+            name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "") \
+                               .replace("+", "").replace("#", "").replace("|", "") \
+                               .replace("@", "").replace("*", "").replace(".", "") \
+                               .replace("https", "").replace("http", "").strip()
+            name = f'{name1[:60]}'
+
+            BUTTONSMAN = InlineKeyboardMarkup([[InlineKeyboardButton(text="Check Manually", url=f"{link0}")]])
+
+            try:
+                BUTTONSCP = InlineKeyboardMarkup([[InlineKeyboardButton(text="Classplus Stream", url=f"{urlcp}")]])
+                BUTTONSYT = InlineKeyboardMarkup([[InlineKeyboardButton(text="YouTube Stream", url=f"{url}")]])
+                BUTTONSDOC = InlineKeyboardMarkup([[InlineKeyboardButton(text="Download Here", url=f"{url}")]])
+
+                if ".pdf" in url or "drive" in url or ".jpg" in url or ".jpeg" in url or ".png" in url:
+                    try:
+                        await m.reply_text(
+                            text=f'——— ✨ [{str(count).zfill(3)}]({link0}) ✨ ———\n\n📔𝐓𝐢𝐭𝐥𝐞 » `{name}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`',
+                            disable_web_page_preview=True,
+                            reply_markup=BUTTONSDOC
+                        )
+                        count += 1
+                    except Exception as e:
+                        await m.reply_text(str(e))
+                        time.sleep(3)
+                        continue
+
+                elif "classplusapp.com" in url:
+                    try:
+                        await m.reply_text(
+                            text=f'——— ✨ [{str(count).zfill(3)}]({link0}) ✨ ———\n\n📔𝐓𝐢𝐭𝐥𝐞 » `{name}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇸 🇵 🇮 🇩 🇾`',
+                            disable_web_page_preview=True,
+                            reply_markup=BUTTONSCP
+                        )
+                        count += 1
+                    except Exception as e:
+                        await m.reply_text(str(e))
+                        time.sleep(3)
+                        continue
+
+                elif "youtu" in url:
+                    try:
+                        await m.reply_text(
+                            text=f'——— ✨ [{str(count).zfill(3)}]({link0}) ✨ ———\n\n📔𝐓𝐢𝐭𝐥𝐞 » `{name}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇸 🇵 🇮 🇩 🇾`',
+                            disable_web_page_preview=True,
+                            reply_markup=BUTTONSYT
+                        )
+                        count += 1
+                    except Exception as e:
+                        await m.reply_text(str(e))
+                        time.sleep(3)
+                        continue
+
+                else:
+                    Show = f"<pre><code>⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ 🇸 🇵 🇮 🇩 🇾</code></pre>"
+                    prog = await m.reply_text(Show, disable_web_page_preview=True)
+                    res_file = await helper.download_video(url, cmd, name)
+                    filename = res_file
+                    await prog.delete(True)
+                    await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
+                    count += 1
+                    time.sleep(3)
+
+            except Exception as e:
+                await m.reply_text(
+                    text=f'——— ✨ [{str(count).zfill(3)}]({link0}) ✨ ———\n\n📔𝐓𝐢𝐭𝐥𝐞 » `{name}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇸 🇵 🇮 🇩 🇾`',
+                    disable_web_page_preview=True,
+                    reply_markup=BUTTONSMAN
+                )
+                count += 1
+                time.sleep(3)
+                continue
+
+    except Exception as e:
+        await m.reply_text(str(e))
+
+    await m.reply_text("<pre><code>Converted By ⌈✨『𝗦𝗣𝗜𝗗𝗬 🕷️』✨⌋</code></pre>")
+
+
+@bot.on_message(filters.text & filters.private & ~filters.command(["start", "help", "broadcast", "users"]))
+async def text_handler(bot: Client, m: Message):
+    if m.from_user.is_bot:
+        return
+
+    links = m.text
+    match = re.search(r'https?://\S+', links)
+    if match:
+        link = match.group(0)
+    else:
+        await m.reply_text("<pre><code>Invalid link format.</code></pre>")
+        return
+
+    editable = await m.reply_text("<pre><code>🔹Processing your link...\n🔁Please wait...⏳</code></pre>")
+    await m.delete()
+
+    await editable.edit(
+        "╭━━━━❰ᴇɴᴛᴇʀ ʀᴇꜱᴏʟᴜᴛɪᴏɴ❱━━➣ \n"
+        "┣━━⪼ send `144`  for 144p\n"
+        "┣━━⪼ send `240`  for 240p\n"
+        "┣━━⪼ send `360`  for 360p\n"
+        "┣━━⪼ send `480`  for 480p\n"
+        "┣━━⪼ send `720`  for 720p\n"
+        "┣━━⪼ send `1080` for 1080p\n"
+        "╰━━⌈⚡[`🇸 🇵 🇮 🇩 🇾`]⚡⌋━━➣ "
+    )
+    input2: Message = await bot.listen(editable.chat.id, filters=filters.text & filters.user(m.from_user.id))
+    raw_text2 = input2.text
+    quality = f"{raw_text2}p"
+    await input2.delete(True)
+    try:
+        if raw_text2 == "144":
+            res = "256x144"
+        elif raw_text2 == "240":
+            res = "426x240"
+        elif raw_text2 == "360":
+            res = "640x360"
+        elif raw_text2 == "480":
+            res = "854x480"
+        elif raw_text2 == "720":
+            res = "1280x720"
+        elif raw_text2 == "1080":
+            res = "1920x1080"
+        else:
+            res = "UN"
+    except Exception:
+        res = "UN"
+
+    await editable.edit("`🔹Enter Your PW Token For 𝐌𝐏𝐃 𝐔𝐑𝐋\n🔹Otherwise send anything`")
+    input4: Message = await bot.listen(editable.chat.id, filters=filters.text & filters.user(m.from_user.id))
+    raw_text4 = input4.text
+    await input4.delete(True)
+
+    await editable.edit("`🔹Send ☞ Thumb URL for Thumbnail\n🔹Send ☞ no for video format\n🔹Send ☞ No for Document format`")
+    input6 = await bot.listen(editable.chat.id, filters=filters.text & filters.user(m.from_user.id))
+    raw_text6 = input6.text
+    await input6.delete(True)
+    await editable.delete()
+
+    thumb = input6.text
+    if thumb.startswith("http://") or thumb.startswith("https://"):
+        getstatusoutput(f"wget '{thumb}' -O 'thumb.jpg'")
+        thumb = "thumb.jpg"
+    else:
+        thumb = "no"
+
+    count = 1
+    arg = 1
+    b_name = "Direct Link"
+    app_name = "Direct"
+    CR = credit
+
+    try:
+        Vxy = link.replace("file/d/", "uc?export=download&id=") \
+                   .replace("www.youtube-nocookie.com/embed", "youtu.be") \
+                   .replace("?modestbranding=1", "") \
+                   .replace("/view?usp=sharing", "")
+        url = Vxy
+        linkcpvod = "https://dragoapi.vercel.app/video/" + Vxy
+
+        if "visionias" in url:
+            try:
+                async with ClientSession() as session:
+                    async with session.get(url, headers={
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                        'Accept-Language': 'en-US,en;q=0.9',
+                        'Referer': 'http://www.visionias.in/',
+                        'User-Agent': 'Mozilla/5.0 (Linux; Android 12; RMX2121) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Mobile Safari/537.36',
+                    }) as resp:
+                        text = await resp.text()
+                        m_match = re.search(r"(https://.*?playlist\.m3u8.*?)\"", text)
+                        if m_match:
+                            url = m_match.group(1)
+            except Exception:
+                pass
+
+        if any(k in url for k in [
+            'videos.classplusapp', "tencdn.classplusapp",
+            "webvideos.classplusapp.com", "media-cdn-alisg.classplusapp.com",
+            "videos.classplusapp.com", "media-cdn-a.classplusapp",
+            "media-cdn.classplusapp"
+        ]):
+            try:
+                url = requests.get(
+                    f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}',
+                    headers={'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgzNjkyMTIsIm9yZ0lkIjoyNjA1LCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTcwODI3NzQyODkiLCJuYW1lIjoiQWNlIiwiZW1haWwiOm51bGwsImlzRmlyc3RMb2dpbiI6dHJ1ZSwiZGVmYXVsdExhbmd1YWdlIjpudWxsLCJjb3VudHJ5Q29kZSI6IklOIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJpYXQiOjE2NDMyODE4NzcsImV4cCI6MTY0Mzg4NjY3N30.hM33P2ai6ivdzxPPfm01LAd4JWv-vnrSxGXqvCirCSpUfhhofpeqyeHPxtstXwe0'}
+                ).json()['url']
+            except Exception:
+                pass
+
+        elif "d1d34p8vz63oiq" in url or "sec1.pw.live" in url:
+            url = f"https://anonymouspwplayer-b99f57957198.herokuapp.com/pw?url={url}?token={raw_text4}"
+
+        name1 = links.replace("\t", "").replace(":", "").replace("/", "") \
+                      .replace("+", "").replace("#", "").replace("|", "") \
+                      .replace("@", "").replace("*", "").replace(".", "") \
+                      .replace("https", "").replace("http", "").strip()
+        name = f'{name1[:20]}'
+
+        if "https://appx-transcoded-videos.livelearn.in/videos/rozgar-data/" in url:
+            url = url.replace("https://appx-transcoded-videos.livelearn.in/videos/rozgar-data/", "")
+            cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
+
+        if "https://appx-transcoded-videos-mcdn.akamai.net.in/videos/bhainskipathshala-data/" in url:
+            url = url.replace("https://appx-transcoded-videos-mcdn.akamai.net.in/videos/bhainskipathshala-data/", "")
+            cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
+
+        if "/master.mpd" in url:
+            cmd = f" yt-dlp -k --allow-unplayable-formats -f bestvideo.{quality} --fixup never {url} "
+            print("counted")
+
+        if "edge.api.brightcove.com" in url:
+            bcov = 'bcov_auth=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MjQyMzg3OTEsImNvbiI6eyJpc0FkbWluIjpmYWxzZSwiYXVzZXIiOiJVMFZ6TkdGU2NuQlZjR3h5TkZwV09FYzBURGxOZHowOSIsImlkIjoiZEUxbmNuZFBNblJqVEROVmFWTlFWbXhRTkhoS2R6MDkiLCJmaXJzdF9uYW1lIjoiYVcxV05ITjVSemR6Vm10ak1WUlBSRkF5ZVNzM1VUMDkiLCJlbWFpbCI6Ik5Ga3hNVWhxUXpRNFJ6VlhiR0ppWTJoUk0wMVdNR0pVTlU5clJXSkRWbXRMTTBSU2FHRnhURTFTUlQwPSIsInBob25lIjoiVUhVMFZrOWFTbmQ1ZVcwd1pqUTViRzVSYVc5aGR6MDkiLCJhdmF0YXIiOiJLM1ZzY1M4elMwcDBRbmxrYms4M1JEbHZla05pVVQwOSIsInJlZmVycmFsX2NvZGUiOiJOalZFYzBkM1IyNTBSM3B3VUZWbVRtbHFRVXAwVVQwOSIsImRldmljZV90eXBlIjoiYW5kcm9pZCIsImRldmljZV92ZXJzaW9uIjoiUShBbmRyb2lkIDEwLjApIiwiZGV2aWNlX21vZGVsIjoiU2Ftc3VuZyBTTS1TOTE4QiIsInJlbW90ZV9hZGRyIjoiNTQuMjI2LjI1NS4xNjMsIDU0LjIyNi4yNTUuMTYzIn19.snDdd-PbaoC42OUhn5SJaEGxq0VzfdzO49WTmYgTx8ra_Lz66GySZykpd2SxIZCnrKR6-R10F5sUSrKATv1CDk9ruj_ltCjEkcRq8mAqAytDcEBp72-W0Z7DtGi8LdnY7Vd9Kpaf499P-y3-godolS_7ixClcYOnWxe2nSVD5C9c5HkyisrHTvf6NFAuQC_FD3TzByldbPVKK0ag1UnHRavX8MtttjshnRhv5gJs5DQWj4Ir_dkMcJ4JaVZO3z8j0OxVLjnmuaRBujT-1pavsr1CCzjTbAcBvdjUfvzEhObWfA1-Vl5Y4bUgRHhl1U-0hne4-5fF0aouyu71Y6W0eg'
+            url = url.split("bcov_auth")[0] + bcov
+
+        if "youtu" in url:
+            ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
+        else:
+            ytf = f"b[height<={raw_text2}]/bv[height<={raw_text2}]+ba/b/bv+ba"
+
+        if "jw-prod" in url:
+            cmd = f'yt-dlp -o "{name}.mp4" "{url}"'
+
+        elif "youtube.com" in url or "youtu.be" in url:
+            cmd = f'yt-dlp --cookies youtube_cookies.txt -f "{ytf}" "{url}" -o "{name}".mp4'
+
+        elif "webvideos.classplusapp." in url:
+            cmd = f'yt-dlp --add-header "referer:https://web.classplusapp.com/" --add-header "x-cdn-tag:empty" -f "{ytf}" "{url}" -o "{name}.mp4"'
+
+        else:
+            cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
+
+        try:
+            cc = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**🎥 Title : {name1}** [{res}]\n\n**📚COURSE : {b_name}** [{app_name}]\n\n**❤️ Extracted By :** {CR}'
+            cc1 = f'——— ✦ {str(count).zfill(3)} ✦ ———\n\n**📁 Title :** {name1}\n\n**📚COURSE : {b_name}**\n\n**❤️ Extracted By :** {CR}'
+
+            if "drive" in url:
+                try:
+                    ka = await helper.download(url, name)
+                    await bot.send_document(chat_id=m.chat.id, document=ka, caption=cc1)
+                    count += 1
+                    os.remove(ka)
+                    time.sleep(1)
+                except FloodWait as e:
+                    await m.reply_text(str(e))
+                    time.sleep(e.x)
+                    count += 1
+
+            elif ".pdf*" in url:
+                try:
+                    url_part, key_part = url.split("*")
+                    url = f"https://dragoapi.vercel.app/pdf/{url_part}*{key_part}"
+                    cmd = f'yt-dlp -o "{name}.pdf" "{url}"'
+                    download_cmd = f"{cmd} -R 25 --fragment-retries 25"
+                    os.system(download_cmd)
+                    await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)
+                    count += 1
+                    os.remove(f'{name}.pdf')
+                except FloodWait as e:
+                    await m.reply_text(str(e))
+                    time.sleep(e.x)
+                    count += 1
+
+            elif ".pdf" in url:
+                try:
+                    cmd = f'yt-dlp -o "{name}.pdf" "{url}"'
+                    download_cmd = f"{cmd} -R 25 --fragment-retries 25"
+                    os.system(download_cmd)
+                    await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)
+                    count += 1
+                    os.remove(f'{name}.pdf')
+                except FloodWait as e:
+                    await m.reply_text(str(e))
+                    time.sleep(e.x)
+                    count += 1
+
+            elif any(ext in url for ext in [".mp3", ".wav", ".m4a"]):
+                try:
+                    ext = url.split('.')[-1]
+                    cmd = f'yt-dlp -x --audio-format {ext} -o "{name}.{ext}" "{url}"'
+                    download_cmd = f"{cmd} -R 25 --fragment-retries 25"
+                    os.system(download_cmd)
+                    await bot.send_document(chat_id=m.chat.id, document=f'{name}.{ext}', caption=cc1)
+                    count += 1
+                    os.remove(f'{name}.{ext}')
+                except FloodWait as e:
+                    await m.reply_text(str(e))
+                    time.sleep(e.x)
+
+            elif any(ext in url for ext in [".jpg", ".jpeg", ".png"]):
+                try:
+                    ext = url.split('.')[-1]
+                    cmd = f'yt-dlp -o "{name}.{ext}" "{url}"'
+                    download_cmd = f"{cmd} -R 25 --fragment-retries 25"
+                    os.system(download_cmd)
+                    await bot.send_photo(chat_id=m.chat.id, photo=f'{name}.{ext}', caption=cc1)
+                    count += 1
+                    os.remove(f'{name}.{ext}')
+                except FloodWait as e:
+                    await m.reply_text(str(e))
+                    time.sleep(e.x)
+                    count += 1
+
+            else:
+                emoji_message = await show_random_emojis(m)
+                Show = f"**⚡Dᴏᴡɴʟᴏᴀᴅ Sᴛᴀʀᴛᴇᴅ...⏳**\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`"
+                prog = await m.reply_text(Show)
+                res_file = await helper.download_video(url, cmd, name)
+                filename = res_file
+                await prog.delete(True)
+                await emoji_message.delete()
+                await helper.send_vid(bot, m, cc, filename, thumb, name, prog)
+                count += 1
+                time.sleep(1)
+
+        except Exception as e:
+            Error = f"⚠️𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐢𝐧𝐠 𝐈𝐧𝐭𝐞𝐫𝐮𝐩𝐭𝐞𝐝\n\n🔗𝐋𝐢𝐧𝐤 » `{link}`\n\n✦𝐁𝐨𝐭 𝐌𝐚𝐝𝐞 𝐁𝐲 ✦ `🇪 🇱   🇲 🇦 🇹 🇦 🇩 🇴 🇷`"
+            await m.reply_text(Error)
+            count += 1
+
+    except Exception as e:
+        await m.reply_text(str(e))
+
+
+broadcast_queue = {}
+
+
+@bot.on_message(filters.command("broadcast") & filters.user(ADMINS))
+async def handle_broadcast(client, message: Message):
+    if message.reply_to_message:
+        original = message.reply_to_message
+        caption_raw = original.caption or original.text or ""
+        text_part = caption_raw
+        keyboard_btn = None
+
+        if "||" in caption_raw:
+            try:
+                text_part, button_part = caption_raw.split("||")
+                buttons = json.loads(button_part.strip())
+                keyboard_btn = InlineKeyboardMarkup(
+                    [[InlineKeyboardButton(text, url=url) for text, url in row] for row in buttons]
+                )
+            except Exception:
+                pass
+
+        broadcast_queue[message.from_user.id] = {
+            "media": original,
+            "caption": text_part.strip(),
+            "reply_markup": keyboard_btn
+        }
+
+        preview_buttons = InlineKeyboardMarkup([
+            [InlineKeyboardButton("✅ Confirm", callback_data="broadcast_confirm"),
+             InlineKeyboardButton("❌ Cancel", callback_data="broadcast_cancel")]
+        ])
+
+        if original.photo:
+            await message.reply_photo(original.photo.file_id, caption=text_part.strip(), reply_markup=keyboard_btn)
+        elif original.document:
+            await message.reply_document(original.document.file_id, caption=text_part.strip(), reply_markup=keyboard_btn)
+        elif original.video:
+            await message.reply_video(original.video.file_id, caption=text_part.strip(), reply_markup=keyboard_btn)
+        else:
+            await message.reply(text_part.strip(), reply_markup=keyboard_btn)
+
+        await message.reply("⚡ Do you want to send this message to all users?", reply_markup=preview_buttons)
+    else:
+        await message.reply(
+            "❗ Reply to a message with text/photo/video to broadcast.\n"
+            'You can also add buttons like this:\n\nCaption here || [["Join","https://t.me/spidy"]]'
+        )
+
+
+@bot.on_callback_query(filters.regex("broadcast_"))
+async def confirm_broadcast(client, query: CallbackQuery):
+    user_id = query.from_user.id
+    action = query.data.split("_")[1]
+
+    if action == "cancel":
+        broadcast_queue.pop(user_id, None)
+        return await query.message.edit("❌ Broadcast cancelled.")
+
+    data = broadcast_queue.pop(user_id, None)
+    if not data:
+        return await query.message.edit("⚠️ Nothing to broadcast.")
+
+    if os.path.exists("users.json"):
+        with open("users.json", "r") as f:
+            users = json.load(f)
+    else:
+        users = []
+
+    success, failed = 0, 0
+    for uid in users:
+        try:
+            m = data["media"]
+            if m.text:
+                await client.send_message(uid, data["caption"], reply_markup=data["reply_markup"])
+            elif m.photo:
+                await client.send_photo(uid, m.photo.file_id, caption=data["caption"], reply_markup=data["reply_markup"])
+            elif m.document:
+                await client.send_document(uid, m.document.file_id, caption=data["caption"], reply_markup=data["reply_markup"])
+            elif m.video:
+                await client.send_video(uid, m.video.file_id, caption=data["caption"], reply_markup=data["reply_markup"])
+            success += 1
+        except Exception:
+            failed += 1
+
+    await query.message.edit(f"✅ Broadcast complete.\n\nSent: {success}\nFailed: {failed}")
+
+
+print("✅ /broadcast triggered")
+
+
+@bot.on_message(filters.command("users") & filters.user(ADMINS))
+async def users_command(client, message):
+    try:
+        with open("users.json", "r") as f:
+            users = json.load(f)
+        await message.reply(f"👥 Total saved users: <b>{len(users)}</b>", parse_mode="html")
+    except FileNotFoundError:
+        await message.reply("No users stored yet.")
+
+
+print("✅ /users triggered")
+
+
+def run_web():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+
+
+if __name__ == "__main__":
+    threading.Thread(target=run_web).start()
+    bot.run()
