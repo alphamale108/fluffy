@@ -1150,9 +1150,19 @@ print("✅ /users triggered")
 
 
 def run_web():
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    port = int(os.environ.get("PORT", 8080))
+    try:
+        app.run(
+            host="0.0.0.0",
+            port=port,
+            debug=False,
+            use_reloader=False,
+            threaded=True,
+        )
+    except OSError as e:
+        print(f"⚠️ Could not start web server on port {port}: {e}")
 
 
 if __name__ == "__main__":
-    threading.Thread(target=run_web).start()
+    threading.Thread(target=run_web, daemon=True).start()
     bot.run()
